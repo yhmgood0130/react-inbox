@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Emails = [
+const MessageData = [
   {
     "id": 1,
     "subject": "You can't input the protocol without calculating the mobile RSS protocol!",
@@ -61,4 +61,4 @@ const Emails = [
   }
 ]
 
-export default Emails
+export default MessageData
