@@ -61,32 +61,31 @@ export default class App extends Component {
         })
       }
     })
-    // this.setState ((prevState) => {prevState.messages.map(message => {
-    //   if(!message.checkbox){
-        // message.checkbox = !message.checkbox;
-        // message.checked = !message.checked;
-    //     allSelected = false;
-    //    }
-    //    console.log(allSelected);
-    //   })
-    //  }
-    // )
-    // if (allSelected) {
-    //   this.setState ((prevState) => {prevState.messages.map(message => {
-    //       message.checkbox = !message.checkbox;
-    //       message.checked = !message.checked;
-    //       allSelected = false;
-    //     })
-    //    }
-    //   )
-    // }
   };
+  markAsReadButton (){
+    this.setState((prevState) => {prevState.messages.map(message => {
+      if(message.checked){
+        message.read = true;
+      }
+     }
+    )
+   })
+ };
+ markAsUnreadButton (){
+   this.setState((prevState) => {prevState.messages.map(message => {
+     if(message.checked){
+       message.read = false;
+     }
+    }
+   )
+  })
+ };
 
   render() {
     return (
       <div className="container">
         <div className="row">
-          <Toolbar messages={this.state.messages} composeButton={this.composeButton.bind(this)} selectAllButton={this.selectAllButton.bind(this)}/>
+          <Toolbar messages={this.state.messages} composeButton={this.composeButton.bind(this)} selectAllButton={this.selectAllButton.bind(this)} markAsReadButton={this.markAsReadButton.bind(this)} markAsUnreadButton={this.markAsUnreadButton.bind(this)} />
           <div>
             <Messages messages={this.state.messages} star={this.star.bind(this)} checkbox={this.checkbox.bind(this)} emailCheck={this.emailCheck.bind(this)}/>
           </div>

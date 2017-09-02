@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import NewMessage from "../NewMessage";
 import Message from "../Message";
 
-const Toolbar = ({messages,composeButton, selectAllButton}) => {
+const Toolbar = ({messages,composeButton, selectAllButton, markAsReadButton, markAsUnreadButton}) => {
     props: {
       composeButton:composeButton
     }
@@ -15,7 +15,7 @@ const Toolbar = ({messages,composeButton, selectAllButton}) => {
     const composeBox = messages.composeForm ? <i className="fa fa-minus"></i> : <i className="fa fa-plus"></i>
     let selectBox;
     let countSelectBox = 0;
-    messages.map(message => { if(message.checked){countSelectBox++ } });
+    messages.map(message => { if(message.checked){countSelectBox++} });
     if(countSelectBox == 0){
       selectBox = <i className="fa fa-square-o"></i>
     }
@@ -40,11 +40,11 @@ const Toolbar = ({messages,composeButton, selectAllButton}) => {
           <button className="btn btn-default" onClick={() => selectAllButton(messages)}>{selectBox}</button>
 
 
-          <button className="btn btn-default">
+          <button className="btn btn-default" onClick={() => markAsReadButton(messages)}>
             Mark As Read
           </button>
 
-          <button className="btn btn-default">
+          <button className="btn btn-default" onClick={() => markAsUnreadButton(messages)}>
             Mark As Unread
           </button>
 
