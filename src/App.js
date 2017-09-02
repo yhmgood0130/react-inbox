@@ -89,18 +89,22 @@ export default class App extends Component {
  removeLabel(label) {
    this.setState((prevState) => {prevState.messages.map(message => {
      if(message.checked && message.labels.includes(label)){
-       message.labels.splice(label,1);
+       console.log(label);
+       message.labels.splice(prevState.messages.indexOf(label),1);
      }
    })}
   )
  };
  deleteEmail(){
-   this.setState((prevState) => {prevState.messages.filter(message => {
+   this.setState((prevState) => {prevState.messages= prevState.messages.filter(message => {
      if(!message.checked){
        return message
      }
    }
   )})
+ }
+ addEmail(){
+
  }
 
   render() {
