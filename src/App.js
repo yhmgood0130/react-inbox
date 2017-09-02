@@ -75,17 +75,39 @@ export default class App extends Component {
    this.setState((prevState) => {prevState.messages.map(message => {
      if(message.checked){
        message.read = false;
-     }
-    }
-   )
+     }})
   })
  };
+ addLabel(label) {
+   this.setState((prevState) => {prevState.messages.map(message => {
+     if(message.checked && !message.labels.includes(label)){
+       message.labels.push(label)
+     }
+    })}
+   )
+  };
+ removeLabel(label) {
+   this.setState((prevState) => {prevState.messages.map(message => {
+     if(message.checked && message.labels.includes(label)){
+       message.labels.splice(label,1);
+     }
+   })}
+  )
+ };
+ deleteEmail(){
+   this.setState((prevState) => {prevState.messages.filter(message => {
+     if(!message.checked){
+       return message
+     }
+   }
+  )})
+ }
 
   render() {
     return (
       <div className="container">
         <div className="row">
-          <Toolbar messages={this.state.messages} composeButton={this.composeButton.bind(this)} selectAllButton={this.selectAllButton.bind(this)} markAsReadButton={this.markAsReadButton.bind(this)} markAsUnreadButton={this.markAsUnreadButton.bind(this)} />
+          <Toolbar messages={this.state.messages} composeButton={this.composeButton.bind(this)} selectAllButton={this.selectAllButton.bind(this)} markAsReadButton={this.markAsReadButton.bind(this)} markAsUnreadButton={this.markAsUnreadButton.bind(this)} addLabel={this.addLabel.bind(this)} removeLabel={this.removeLabel.bind(this)} deleteEmail={this.deleteEmail.bind(this)}/>
           <div>
             <Messages messages={this.state.messages} star={this.star.bind(this)} checkbox={this.checkbox.bind(this)} emailCheck={this.emailCheck.bind(this)}/>
           </div>

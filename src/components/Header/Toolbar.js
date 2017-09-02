@@ -2,10 +2,7 @@ import React, { Component } from 'react';
 import NewMessage from "../NewMessage";
 import Message from "../Message";
 
-const Toolbar = ({messages,composeButton, selectAllButton, markAsReadButton, markAsUnreadButton}) => {
-    props: {
-      composeButton:composeButton
-    }
+const Toolbar = ({messages,composeButton, selectAllButton, markAsReadButton, markAsUnreadButton, addLabel, removeLabel, deleteEmail}) => {
 
     var view;
     if(messages.composeForm){
@@ -48,21 +45,21 @@ const Toolbar = ({messages,composeButton, selectAllButton, markAsReadButton, mar
             Mark As Unread
           </button>
 
-          <select className="form-control label-select">
+          <select className="form-control label-select" onChange={(event) => addLabel(event.target.value)}>
             <option>Apply label</option>
             <option value="dev">dev</option>
             <option value="personal">personal</option>
             <option value="gschool">gschool</option>
           </select>
 
-          <select className="form-control label-select">
+          <select className="form-control label-select" onChange={(event) => removeLabel(event.target.value)}>
             <option>Remove label</option>
             <option value="dev">dev</option>
             <option value="personal">personal</option>
             <option value="gschool">gschool</option>
           </select>
 
-          <button className="btn btn-default">
+          <button className="btn btn-default" onClick={() => deleteEmail(messages)}>
             <i className="fa fa-trash-o"></i>
           </button>
         </div>
