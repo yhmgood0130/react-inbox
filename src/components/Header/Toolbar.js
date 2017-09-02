@@ -9,6 +9,8 @@ const Toolbar = ({messages,composeButton, selectAllButton, markAsReadButton, mar
       view = <NewMessage />;
     }
 
+    let count = 0;
+    const NumOfUnreadMsg = messages.filter(message => !message.read).length
     const composeBox = messages.composeForm ? <i className="fa fa-minus"></i> : <i className="fa fa-plus"></i>
     let selectBox;
     let countSelectBox = 0;
@@ -28,7 +30,7 @@ const Toolbar = ({messages,composeButton, selectAllButton, markAsReadButton, mar
       <div className="row toolbar">
         <div className="col-md-12">
           <p className="pull-right">
-            <span className="badge badge">2</span>
+            <span className="badge badge">{NumOfUnreadMsg}</span>
             unread messages
           </p>
 
