@@ -1,25 +1,31 @@
 import React, { Component } from 'react';
-import NewMessage from "../NewMessage"
+import NewMessage from "../NewMessage";
+import Message from "../Message";
 
-const Toolbar = React.createClass ({
-  getInitialState: function() {
-    return ({isToggleOn: false,isSelectAll: false})
-  },
-  handleClick: function() {
-    this.setState (prevState => ({
-      isToggleOn: !prevState.isToggleOn
-    }));
-  },
-  checkboxClick: function() {
-    this.setState (prevState => ({
-      isSelectAll: !prevState.isSelectAll
-    }));
-  },
-  render() {
+const Toolbar = ({messages,composeButton, selectAllButton}) => {
+    props: {
+      composeButton:composeButton
+    }
+
     var view;
-    if(this.state.isToggleOn){
+    if(messages.composeForm){
       view = <NewMessage />;
     }
+
+    const composeBox = messages.composeForm ? <i className="fa fa-minus"></i> : <i className="fa fa-plus"></i>
+    let selectBox;
+    let countSelectBox = 0;
+    messages.map(message => { if(message.checked){countSelectBox++ } });
+    if(countSelectBox == 0){
+      selectBox = <i className="fa fa-square-o"></i>
+    }
+    else if(countSelectBox == messages.length){
+      selectBox = <i className="fa fa-check-square-o"></i>
+    }
+    else {
+      selectBox = <i className="fa fa-minus-square-o"></i>
+    }
+
     return (
     <div>
       <div className="row toolbar">
@@ -29,13 +35,10 @@ const Toolbar = React.createClass ({
             unread messages
           </p>
 
-          <a className="btn btn-danger" onClick={this.handleClick}>
-              {this.state.isToggleOn ? <i className="fa fa-minus"></i> : <i className="fa fa-plus"></i> }
-          </a>
+          <a className="btn btn-danger" onClick={() => composeButton(messages)}>{composeBox}</a>
 
-          <button className="btn btn-default" onClick={this.checkboxClick}>
-            {this.state.isSelectAll ? <i className="fa fa-check-square-o"></i> : <i className="fa fa-square-o"></i>}
-          </button>
+          <button className="btn btn-default" onClick={() => selectAllButton(messages)}>{selectBox}</button>
+
 
           <button className="btn btn-default">
             Mark As Read
@@ -66,9 +69,7 @@ const Toolbar = React.createClass ({
       </div>
       {view}
     </div>
-    )
-  }
- }
-)
+  )
+}
 
 export default Toolbar
