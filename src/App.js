@@ -9,7 +9,7 @@ export default class App extends Component {
 
   constructor(props) {
     super(props)
-    this.state = { messages: MessageData}
+    this.state = { messages: MessageData, newSub: ""}
   };
 
   checkbox (message){
@@ -102,9 +102,6 @@ export default class App extends Component {
      }
    }
   )})
- }
- addEmail(){
-
  }
 
   render() {
