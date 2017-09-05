@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Toolbar from "./components/Header/Toolbar"
-import Message from "./components/Message"
 import Messages from "./components/Messages"
 import MessageData from "./components/MessageData"
 import './App.css';
@@ -54,7 +53,7 @@ export default class App extends Component {
           message.checked = false;
         })
       }
-      else if(selectedBoxCount == 0){
+      else if(selectedBoxCount === 0){
         prevState.messages.map(message => {
           message.checkbox = true;
           message.checked = true;
@@ -89,8 +88,7 @@ export default class App extends Component {
  removeLabel(label) {
    this.setState((prevState) => {prevState.messages.map(message => {
      if(message.checked && message.labels.includes(label)){
-       console.log(label);
-       message.labels.splice(prevState.messages.indexOf(label),1);
+       message.labels.splice(message.labels.indexOf(label) ,1);
      }
    })}
   )
