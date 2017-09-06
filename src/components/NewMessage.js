@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import MessageList from './MessageData'
 
+const baseURL = 'https://inbox-react.herokuapp.com/api'
+
 export default class NewMessage extends Component {
   constructor(props) {
     super(props);
@@ -10,7 +12,27 @@ export default class NewMessage extends Component {
 
   handleSubmit(event) {
     alert("You've typed " + this.subject.value + " and " + this.content.value);
+    let newData = {
+      "subject": this.subject.value,
+      "body":this.content.value
+    };
+
+    let settings = {
+      method : 'POST',
+      headers : {
+        'content-type' : 'application/json'
+      },
+      body: JSON.stringify(newData)
+    }
+
+    fetch(`${baseURL}/messages`,settings)
+      .then(response => {
+        if(response.ok){
+          window.location.reload()
+        }
+      })
     MessageList.push({ id:MessageList.length + 1, subject:this.subject.value , read: false, starred: false, selected: false, labels:[]})
+
     event.preventDefault();
   };
   render() {
