@@ -4,12 +4,12 @@ const Message = ({message, star, checkbox, emailCheck}) => {
     const stars = message.starred ? "star fa fa-star" : "star fa fa-star-o"
     const starButton = message.starred ? <i className={stars} onClick={() => star(message)} ></i> : <i className={stars} onClick={() => star(message)} ></i>
     const reads = message.read ? "row message read" : "row message unread"
-    const checkBox = message.checkbox ? " selected" : ""
+    const checkBox = message.checkbox ? " selected" : " "
     const checked = message.checked ? "checked" : ""
     const bodyStatus = message.bodyStatus ?
                         <div className="row message-body">
                           <div className="col-xs-11 col-xs-offset-1">
-                            {message.subject}
+                          {message.body}
                           </div>
                         </div>
                         :

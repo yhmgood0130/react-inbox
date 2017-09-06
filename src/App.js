@@ -129,8 +129,8 @@ export default class App extends Component {
      };
      fetch(`${baseURL}/messages`,settings)
       .then(response => {
-        console.log(response);
         if(response.ok){
+          console.log(response);
         }
       })
    })

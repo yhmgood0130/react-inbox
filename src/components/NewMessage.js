@@ -11,7 +11,6 @@ export default class NewMessage extends Component {
   };
 
   handleSubmit(event) {
-    alert("You've typed " + this.subject.value + " and " + this.content.value);
     let newData = {
       "subject": this.subject.value,
       "body":this.content.value
